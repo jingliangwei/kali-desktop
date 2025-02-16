@@ -1,0 +1,9 @@
+FROM kalilinux/kali-rolling
+
+USER root
+WORKDIR /root
+RUN /bin/sh -c set -eux; apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -y kali-desktop-xfce; apt clean; rm -rf /var/lib/apt/lists/*
+COPY ./script/xstartup /root/xstartup
+COPY ./script/start-docker.sh /opt/start-docker.sh
+
+CMD ["/sbin/init"]
